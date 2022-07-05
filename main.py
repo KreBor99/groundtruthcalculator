@@ -93,7 +93,9 @@ def calc_motion_truths(position):
 
 
 
-def calc_truths(position):  # returns an array of X, Y gaze pairs for the user looking at each point A-E, with the last entry being the user's location
+def calc_truths(position):
+    """returns an array of X, Y gaze pairs for the user looking at
+    each point A-E, with the last entry being the user's location"""
     truths = []
     for i in iterate:  # calculates the xgaze and ygaze of the user for each of the points A-E
         xgaze = math.atan((position[4][0]-position[i][0])/position[5][2])
@@ -101,6 +103,14 @@ def calc_truths(position):  # returns an array of X, Y gaze pairs for the user l
         truths.append([xgaze, ygaze])
     return truths  # what is returned is an array of pairs corresponding to each point's xgaze and ygaze
 
+def calc_angle(pos_pixel: float, z_dist:
+            float, screen_pixels: float, screen_phys: float):
+    """Calculates angle based on pixel position, z distance,
+    width/height in pixels, and width/height physically."""
+    leg_pixel = pos_pixel - screen_pixels/2
+    pixel_to_phys = screen_phys / screen_pixels
+    leg_phys = leg_pixel * pixel_to_phys
+    return math.atan2(leg_phys,z_dist)
 
 current_file = "/home/kre8or/PycharmProjects/Stargaze/recordings/today_06222022-155021_device_0.csv"
 monitor = [53, 30]  # dimensions of the monitor in cm
