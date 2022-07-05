@@ -2,21 +2,27 @@ import csv
 import math
 import numpy as np
 
-currentfile = "/home/kre8or/PycharmProjects/Stargaze/recordings/today_06222022-155021_device_0.csv"
+current_file = "/home/kre8or/PycharmProjects/Stargaze/recordings/today_06222022-155021_device_0.csv"
 
 
-def getLen():  # gets the length of the csv file since getting the length without a function moves through the file
-    with open(currentfile, 'r') as csv_file:
-        csv_reader = csv.reader(csv_file)
+def get_csv_len():  # gets the length of the csv file since getting the length without a function moves through the file
+    with open(current_file, 'r') as csv_file:
+        # csv_reader = csv.reader(csv_file)
         return len(list(csv_file))
 
+def set_csv_path(csv_name: str):
+    global current_file
+    current_file = csv_name
 
-def differentiatePoints():  # function for telling fixation points from saccade points using the std of gaze vectors
-    leng = getLen()
+def get_csv_path():
+    return current_file
+
+def diff_points():  # function for telling fixation points from saccade points using the std of gaze vectors
+    leng = get_csv_len()
     deltas = []
     temp = []
     deltasstd = []
-    with open(currentfile, 'r') as csv_file:
+    with open(current_file, 'r') as csv_file:
         csv_reader = csv.reader(csv_file)
         csv_contents = [_ for _ in csv_reader]
         if len(csv_contents) < 91:
@@ -52,12 +58,12 @@ def differentiatePoints():  # function for telling fixation points from saccade 
     print(fixatedframes)
     print("The eyes are in saccade in the following frames: ")
     print(saccadeframes)
-    #print(identifywindows(fixatedframes))
+    #print(identify_windows(fixatedframes))
 
-def identifywindows(newarray):
+def identify_windows(newarray):
     windowtimestamps = []
     windowid = 0
-    with open(currentfile, 'r') as csv_file:
+    with open(current_file, 'r') as csv_file:
         csv_reader = csv.reader(csv_file)
         csv_contents = [_ for _ in csv_reader]
         if len(csv_contents) < 91:
