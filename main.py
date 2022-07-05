@@ -86,21 +86,11 @@ def calculatelocations(
     return calculatetruths(temp)
 
 
-def calculatetruths(
-        position):  # returns an array of X, Y gaze pairs for the user looking at each point A-E, with the last entry being the user's location
+def calculatetruths(position):  # returns an array of X, Y gaze pairs for the user looking at each point A-E, with the last entry being the user's location
     truths = []
     for i in iterate:  # calculates the xgaze and ygaze of the user for each of the points A-E
-        xgaze = math.asin(math.sqrt((position[5][0] - position[i][0]) ** 2) / math.sqrt(
-            ((position[5][0] - position[i][0]) ** 2) + (position[5][2] ** 2)))
-        ygaze = math.asin(math.sqrt((position[5][1] - position[i][1]) ** 2) / math.sqrt(
-            ((position[5][1] - position[i][1]) ** 2) + (position[5][2] ** 2)))
-        if i == 0:  # these if statements make the gaze negative where appropriate, since they are all positive after calculations.
-            ygaze = ygaze * -1
-        if i == 1:
-            xgaze = xgaze * -1
-            ygaze = ygaze * -1
-        if i == 2:
-            xgaze = xgaze * -1
+        xgaze = math.atan((position[4][0]-position[i][0])/position[5][2])
+        ygaze = math.atan((position[4][1]-position[i][1])/position[5][2])
         truths.append([xgaze, ygaze])
     return truths  # what is returned is an array of pairs corresponding to each point's xgaze and ygaze
 
