@@ -83,7 +83,14 @@ def calc_locations(
         for i in iterate:
             temp[i][0] = -1 * (original[i][0] - 63)
             temp[i][1] = -1 * (original[i][1] - monitor[1] / 2)
-    return calc_truths(temp)
+    return calc_motion_truths(temp)
+    # return calc_truths(temp)
+
+def calc_motion_truths(position):
+    truths= []
+    speed
+
+
 
 
 def calc_truths(position):  # returns an array of X, Y gaze pairs for the user looking at each point A-E, with the last entry being the user's location
@@ -103,7 +110,10 @@ iterate = [0, 1, 2, 3, 4, 5]  # used to iterate in for loops
 position = float(input(
     "Please choose a camera location:\n1. Bottom\n2. Top\n3. Left\n4. Right\n"))  # used to determine what translation of the points will be done
 distance = float(input("Please enter the distance from camera\n"))
+speed = float(input("Please enter the speed at which the dot is traveling across the screen(12, 8, or 4)"))
+fps = float(input("Please enter the frames per second for the recording session()"))
 original.append([monitor[0] / 2, monitor[1] / 2, distance])  # appends the location of the user
-analysis.diff_points()
-print("The xgaze, ygaze pairs for each point on screen are as follows: ")
-print(calc_locations(original))
+#analysis.diff_points()
+#print("The xgaze, ygaze pairs for each point on screen are as follows: ")
+#print(calc_locations(original))
+print(calc_motion_truths(position))
